@@ -246,7 +246,7 @@ const LeetCodeDashboard: React.FC<LeetCodeDashboardProps> = ({
   const handleItemsPerPageChange = (value: string) => {
     const newItemsPerPage = parseInt(value);
     setItemsPerPage(newItemsPerPage);
-    setCurrentPage(1); // Reset to first page when changing items per page
+    setCurrentPage(1); 
   };
 
   const goToNextPage = () => {
@@ -275,299 +275,288 @@ const LeetCodeDashboard: React.FC<LeetCodeDashboardProps> = ({
   }
 
   return (
-    <div className="p-6 bg-black dark:bg-black">
-  <Card className="w-full bg-white dark:bg-black ">
-    <CardHeader>
-      <CardTitle className="text-3xl font-extrabold text-white dark:text-white">
-        Practice Questions
-      </CardTitle>
-      <CardDescription className="text-sm text-gray-500 dark:text-gray-300">
-        Browse through {totalQuestions.toLocaleString()} LeetCode questions
-        asked in technical interviews
-      </CardDescription>
-    </CardHeader>
-    <CardContent>
-      <div className="flex flex-col gap-6">
-        {/* Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card className="bg-black rounded-md shadow-sm">
-            <CardContent className="pt-6">
-              <div className="flex justify-between items-baseline">
-                <div className="text-2xl font-semibold text-transparent dark:text-blue-300">
-                  {statistics.totalSolved}
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">/ {statistics.total}</div>
-              </div>
-              <div className="text-sm text-gray-500 dark:text-white">Total Solved</div>
-              <div className="mt-2">
-                <Progress 
-                  value={(statistics.totalSolved / statistics.total) * 100} 
-                  className="h-2 rounded-full bg-blue-200 dark:bg-bg-white"
+    <div className="p-6">
+      <Card className="w-full bg-black">
+        <CardHeader>
+          <CardTitle className="text-3xl text-green-600 text-center  font-bold">
+          Explore Technical Interview Questions
+          </CardTitle>
+          <CardDescription className="text-white text-center">
+          Access a curated collection of LeetCode problems to prepare for your next interview
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-8">
+            {/* Statistics */}
+            <div className="grid grid-cols-4 md:grid-cols-4 gap-4">
+              <Card className="bg-transparent">
+                <CardContent className="pt-6">
+                  <div className="flex justify-between items-baseline">
+                    <div className="text-2xl font-bold">{statistics.totalSolved}</div>
+                    <div className="text-sm text-blue-600">/ {statistics.total}</div>
+                  </div>
+                  <div className="text-sm text-blue-600">
+                    Total Solved
+                  </div>
+                  <div className="mt-2">
+                    <Progress 
+                      value={(statistics.totalSolved / statistics.total) * 100} 
+                      className="h-2"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-background/50">
+                <CardContent className="pt-6">
+                  <div className="flex justify-between items-baseline">
+                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                      {statistics.easySolved}
+                    </div>
+                    <div className="text-sm text-green-600">/ {statistics.easy}</div>
+                  </div>
+                  <div className="text-sm text-green-600">Easy</div>
+                  <div className="mt-2">
+                    <Progress 
+                      value={(statistics.easySolved / statistics.easy) * 100} 
+                      className="h-2 [&>div]:bg-green-600 dark:[&>div]:bg-green-400 bg-green-200 dark:bg-green-950"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-background/50">
+                <CardContent className="pt-6">
+                  <div className="flex justify-between items-baseline">
+                    <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+                      {statistics.mediumSolved}
+                    </div>
+                    <div className="text-sm text-yellow-600">/ {statistics.medium}</div>
+                  </div>
+                  <div className="text-sm text-yellow-600">Medium</div>
+                  <div className="mt-2">
+                    <Progress 
+                      value={(statistics.mediumSolved / statistics.medium) * 100} 
+                      className="h-2 [&>div]:bg-yellow-600 dark:[&>div]:bg-yellow-400 bg-yellow-200 dark:bg-yellow-950"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-background/50">
+                <CardContent className="pt-6">
+                  <div className="flex justify-between items-baseline">
+                    <div className="text-2xl font-bold text-red-600 dark:text-red-400">
+                      {statistics.hardSolved}
+                    </div>
+                    <div className="text-sm text-red-600">/ {statistics.hard}</div>
+                  </div>
+                  <div className="text-sm text-red-600">Hard</div>
+                  <div className="mt-2">
+                    <Progress 
+                      value={(statistics.hardSolved / statistics.hard) * 100} 
+                      className="h-2 [&>div]:bg-red-600 dark:[&>div]:bg-red-400 bg-red-200 dark:bg-red-950"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Filters */}
+            <div className="flex flex-col md:flex-row gap-3 ">
+              <div className="md:w-[200px] bg-gray-900">
+                <Input
+                  placeholder="Search For Company"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full"
                 />
               </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-black rounded-md shadow-sm">
-            <CardContent className="pt-6">
-              <div className="flex justify-between items-baseline">
-                <div className="text-2xl font-semibold text-green-600 dark:text-green-400">
-                  {statistics.easySolved}
+
+              <Select
+                value={difficultyFilter}
+                onValueChange={setDifficultyFilter}
+              >
+                <SelectTrigger className="w-full md:w-[200px] bg-gray-900">
+                  <SelectValue placeholder="Difficulty" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Select Difficulty level</SelectItem>
+                  <SelectItem value="Easy">Easy</SelectItem>
+                  <SelectItem value="Medium">Medium</SelectItem>
+                  <SelectItem value="Hard">Hard</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <Select value={premiumFilter} onValueChange={setPremiumFilter}>
+                <SelectTrigger className="w-full md:w-40">
+                  <SelectValue placeholder="Premium Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Questions?</SelectItem>
+                  <SelectItem value="free">Free</SelectItem>
+                  <SelectItem value="premium">Premium</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Questions Table */}
+            { filteredQuestions.length === 0 ? (
+                <div className="p-4 text-center text-muted-foreground">
+                  No questions found , try some other filters?
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">/ {statistics.easy}</div>
-              </div>
-              <div className="text-sm text-gray-500 dark:text-white">Easy</div>
-              <div className="mt-2">
-                <Progress 
-                  value={(statistics.easySolved / statistics.easy) * 100} 
-                  className="h-2 rounded-full bg-green-200 dark:bg-white"
-                />
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-black rounded-md shadow-sm">
-            <CardContent className="pt-6">
-              <div className="flex justify-between items-baseline">
-                <div className="text-2xl font-semibold text-violet-600 dark:text-violet-400">
-                  {statistics.mediumSolved}
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">/ {statistics.medium}</div>
-              </div>
-              <div className="text-sm text-gray-500 dark:text-white">Medium</div>
-              <div className="mt-2">
-                <Progress 
-                  value={(statistics.mediumSolved / statistics.medium) * 100} 
-                  className="h-2 rounded-full bg-violet-200 dark:bg-white"
-                />
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-black rounded-md shadow-sm">
-            <CardContent className="pt-6">
-              <div className="flex justify-between items-baseline">
-                <div className="text-2xl font-semibold text-red-600 dark:text-red-400">
-                  {statistics.hardSolved}
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">/ {statistics.hard}</div>
-              </div>
-              <div className="text-sm text-gray-500 dark:text-white">Hard</div>
-              <div className="mt-2">
-                <Progress 
-                  value={(statistics.hardSolved / statistics.hard) * 100} 
-                  className="h-2 rounded-full bg-red-200 dark:bg-white"
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="md:w-[250px]">
-            <Input
-              placeholder="Search companies..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full bg-white dark:bg-transparent text-white dark:text-white"
-            />
-          </div>
-
-          <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-            <SelectTrigger className="w-full md:w-52 bg-white dark:bg-transparent text-white dark:text-white">
-              <SelectValue placeholder="Difficulty" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Difficulties</SelectItem>
-              <SelectItem value="Easy">Easy</SelectItem>
-              <SelectItem value="Medium">Medium</SelectItem>
-              <SelectItem value="Hard">Hard</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Select value={premiumFilter} onValueChange={setPremiumFilter}>
-            <SelectTrigger className="w-full md:w-40 bg-gray-100 dark:bg-transparent text-white dark:text-gray-300">
-              <SelectValue placeholder="Premium Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Questions</SelectItem>
-              <SelectItem value="free">Free Only</SelectItem>
-              <SelectItem value="premium">Premium Only</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <TopicDropdown
-            options={uniqueTopics}
-            selectedOptions={selectedTopics}
-            setSelectedOptions={setSelectedTopics}
-          />
-        </div>
-
-        {/* Questions Table */}
-        {filteredQuestions.length === 0 ? (
-          <div className="p-4 text-center text-white dark:text-white">
-            No questions found, try adjusting the filters.
-          </div>
-        ) : (
-          <div className="rounded-md border bg-white dark:bg-black shadow-sm">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-4"></TableHead>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Company</TableHead>
-                  <TableHead>Difficulty</TableHead>
-                  <TableHead>Topics</TableHead>
-                  <TableHead className="text-right">Acceptance</TableHead>
-                  <TableHead className="text-right">Frequency</TableHead>
-                  <TableHead className="text-center">Premium</TableHead>
-                  <TableHead className="text-left">Solution</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {currentItems.map((question) => (
-                  <TableRow key={`${question.ID}-${question.company}`}>
-                    <TableCell className="w-4">
-                      <Checkbox
-                        checked={checkedItems[question.ID] || false}
-                        onCheckedChange={(value: boolean) =>
-                          handleCheckboxChange(question.ID, value)
-                        }
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <a
-                        href={`https://leetcode.com${question.URL}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-white dark:text-white dark:hover:text-blue-500"
-                      >
-                        {question.Title}
-                      </a>
-                    </TableCell>
-                    <TableCell>
-                      <div className="capitalize">{capitalizeWords(question.company)}</div>
-                    </TableCell>
-                    <TableCell>
-                      <DifficultyBadge difficulty={question.Difficulty as "Easy" | "Medium" | "Hard"} />
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex flex-wrap gap-1">
-                        {question.Topics.split(",").map((topic, index) => (
-                          <span
-                            key={index}
-                            className="px-2 py-1 rounded-full text-xs font-semibold bg-transparent text-yellow-800 dark:text-yellow-700"
-                          >
-                            {topic.trim()}
-                          </span>
-                        ))}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-right">{question["Acceptance %"]}</TableCell>
-                    <TableCell className="text-right">{question["Frequency %"]}</TableCell>
-                    <TableCell className="text-center">
-                      {question["Is Premium"] === "Y" ? (
-                        <Check className="h-4 w-4 mx-auto text-green-600 dark:text-green-400" />
-                      ) : (
-                        <X className="h-4 w-4 mx-auto text-red-600 dark:text-red-600" />
-                      )}
-                    </TableCell>
-                    <TableCell className="flex items-center gap-2">
-                      <VideoDialog id={question.ID} title={question.Title} />
-                      <SolutionDialog questionId={question.ID} title={question.Title} />
-                    </TableCell>
+              ) : (
+            <div>
+              <Table>
+                <TableHeader>
+                  <TableRow >
+                    <TableHead className="w-4"></TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Company</TableHead>
+                    <TableHead>Difficulty</TableHead>
+                    <TableHead>Topics</TableHead>
+                    <TableHead className="text-center">Premium</TableHead>
+                    
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <div className="flex items-center justify-between py-4 px-2 bg-black dark:bg-black">
-              <div className="flex items-center space-x-2">
-                <p className="text-sm text-blue-600 dark:text-blue-300">Items per page</p>
-                <Select
-                  value={itemsPerPage.toString()}
-                  onValueChange={handleItemsPerPageChange}
-                >
-                  <SelectTrigger className="w-[70px] bg-gray-100 dark:bg-transparent text-white dark:text-white">
-                    <SelectValue placeholder={itemsPerPage} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[5, 10, 20, 50, 100].map((size) => (
-                      <SelectItem key={size} value={size.toString()}>
-                        {size}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex items-center space-x-6">
+                </TableHeader>
+                <TableBody>
+                  {currentItems.map((question) => (
+                    <TableRow key={`${question.ID}-${question.company}`}>
+                      <TableCell className="w-4">
+                        <Checkbox
+                          checked={checkedItems[question.ID] || false}
+                          onCheckedChange={(value: boolean) =>
+                            handleCheckboxChange(question.ID, value)
+                          }
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <a
+                          href={`https://leetcode.com${question.URL}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-green-600 hover:text-primary hover:underline"
+                        >
+                          {question.Title}
+                        </a>
+                      </TableCell>
+                      <TableCell>
+                        <div className="capitalize">
+                          {capitalizeWords(question.company)}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <DifficultyBadge
+                          difficulty={
+                            question.Difficulty as "Easy" | "Medium" | "Hard"
+                          }
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex flex-wrap gap-1">
+                          {question.Topics.split(",").map((topic, index) => (
+                            <span
+                              key={index}
+                              className="px-2 py-1 rounded-full text-xs font-semibold  text-white dark:text-white"
+                            >
+                              {topic.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {question["Is Premium"] === "Y" ? (
+                          <Check className="h-4 w-4 mx-auto text-green-600 dark:text-green-400" />
+                        ) : (
+                          <X className="h-4 w-4 mx-auto text-red-600 dark:text-red-400" />
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <div className="flex items-center justify-between py-4 px-2">
                 <div className="flex items-center space-x-2">
-                  <p className="text-sm text-gray-600 dark:text-blue-300">Go to page</p>
-                  <Input
-                    type="number"
-                    min={1}
-                    max={totalPages}
-                    value={goToPage}
-                    onChange={(e) => setGoToPage(e.target.value)}
-                    onKeyDown={handleGoToPage}
-                    className="w-[70px] bg-gray-100 dark:bg-transparent text-white dark:text-gray-300"
-                    placeholder={currentPage.toString()}
-                  />
+                  <p className="text-sm text-muted-foreground">Items per page</p>
+                  <Select
+                    value={itemsPerPage.toString()}
+                    onValueChange={handleItemsPerPageChange}
+                  >
+                    <SelectTrigger className="w-[70px]">
+                      <SelectValue placeholder={itemsPerPage} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[5, 10, 20, 50, 100].map((size) => (
+                        <SelectItem key={size} value={size.toString()}>
+                          {size}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                <div className="flex items-center space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={goToFirstPage}
-                    disabled={currentPage === 1}
-                    className="text-white dark:text-blue-300"
-                  >
-                    <ChevronLeft className="h-8 w-6 mr-5" />
-                    First
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={goToPreviousPage}
-                    disabled={currentPage === 1}
-                    className="text-yellow-600 dark:text-gray-300"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <p className="text-sm text-blue-300 dark:text-blue-300">
-                    Page {currentPage} of {totalPages}
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={goToNextPage}
-                    disabled={currentPage === totalPages}
-                    className="text-gray-600 dark:text-gray-300"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={goToLastPage}
-                    disabled={currentPage === totalPages}
-                    className="text-white dark:text-white"
-                  >
-                    Last
-                    <ChevronRight className="h-4 w-4 ml-2" />
-                  </Button>
+                <div className="flex items-center space-x-6">
+                  <div className="flex items-center space-x-2">
+                    <p className="text-sm text-muted-foreground">Go to page</p>
+                    <Input
+                      type="number"
+                      min={1}
+                      max={totalPages}
+                      value={goToPage}
+                      onChange={(e) => setGoToPage(e.target.value)}
+                      onKeyDown={handleGoToPage}
+                      className="w-[70px]"
+                      placeholder={currentPage.toString()}
+                    />
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={goToFirstPage}
+                      disabled={currentPage === 1}
+                    >
+                      <ChevronLeft className="h-4 w-4 mr-2" />
+                      First
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={goToPreviousPage}
+                      disabled={currentPage === 1}
+                    >
+                      Previous
+                    </Button>
+                    <div className="text-sm font-medium">
+                      Page {currentPage} of {totalPages}
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={goToNextPage}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={goToLastPage}
+                      disabled={currentPage === totalPages}
+                    >
+                      Last
+                      <ChevronRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
+            )}
           </div>
-        )}
-      </div>
-    </CardContent>
-  </Card>
-</div>
-
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

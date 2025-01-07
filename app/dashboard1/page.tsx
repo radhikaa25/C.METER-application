@@ -5,7 +5,7 @@ import LeetCodeDashboard from "@/components/LeetCodeDashboard";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
-export default function DashboardPage() {
+export default function Dashboard1Page() {
   const { userId } = useAuth();
   const router = useRouter();
 
@@ -39,7 +39,7 @@ export default function DashboardPage() {
     return (
       <div className="container mx-auto py-8 bg-black">
         <div className="space-y-6">
-          <div className="w-48 h-8 bg-muted animate-pulse rounded-md" />
+          <div className="w-48 h-8 bg-muted animate-rainbow rounded-md" />
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="h-24 bg-muted animate-pulse rounded-lg" />

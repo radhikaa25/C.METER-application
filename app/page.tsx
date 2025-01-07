@@ -57,17 +57,17 @@ export default function Home() {
 
           {/* Call-to-Action Buttons */}
           <motion.div variants={itemVariants} className="space-x-4">
-            <Link href="/dashboard">
+            <Link href="/dashboard1">
               <button
                 className="px-8 py-4 font-semibold text-lg rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:bg-yellow-700 transition-shadow shadow-lg hover:shadow-2xl"
               >
-                Start Your Journey
+                Get Started
               </button>
             </Link>
-            <Link href="/AddNewInterview">
+            <Link href="https://mock-app-interview.vercel.app/">
               <button
                 className="px-8 py-4 font-semibold text-lg rounded-full bg-gray-800 text-gold hover:bg-gray-700 transition-shadow shadow-lg hover:shadow-2xl" >
-                Explore Features
+                Take Mock Interview
               </button>
             </Link>
           </motion.div>

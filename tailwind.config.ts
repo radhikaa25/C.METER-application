@@ -10,61 +10,61 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: "black", // Light gray background
+        foreground: "hsl(220, 15%, 20%)", // Dark text
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "hsl(240, 10%, 98%)", // Soft white card background
+          foreground: "hsl(220, 12%, 25%)", // Text color for cards
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "hsl(0, 0%, 98%)", // Popover background
+          foreground: "hsl(210, 10%, 30%)", // Popover text
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "hsl(204, 86%, 53%)", // Blue primary
+          foreground: "hsl(0, 0%, 100%)", // White text
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "hsl(34, 100%, 50%)", // Bright orange
+          foreground: "hsl(0, 0%, 100%)", // White text
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "hsl(210, 10%, 80%)", // Muted gray
+          foreground: "hsl(210, 10%, 40%)", // Muted text
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "hsl(160, 65%, 45%)", // Green accent
+          foreground: "hsl(0, 0%, 100%)", // White text
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "hsl(0, 75%, 55%)", // Bright red
+          foreground: "hsl(0, 0%, 100%)", // White text
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        border: "hsl(210, 20%, 90%)", // Light border
+        input: "hsl(210, 20%, 85%)", // Input field background
+        ring: "hsl(204, 86%, 53%)", // Ring effect color
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          "1": "hsl(204, 86%, 53%)",
+          "2": "hsl(34, 100%, 50%)",
+          "3": "hsl(160, 65%, 45%)",
+          "4": "hsl(0, 75%, 55%)",
+          "5": "hsl(45, 100%, 60%)", // Yellow for chart 5
         },
-        "color-1": "hsl(var(--color-1))",
-        "color-2": "hsl(var(--color-2))",
-        "color-3": "hsl(var(--color-3))",
-        "color-4": "hsl(var(--color-4))",
-        "color-5": "hsl(var(--color-5))",
+        "color-1": "hsl(280, 50%, 60%)", // Purple
+        "color-2": "hsl(345, 60%, 50%)", // Pink
+        "color-3": "hsl(220, 40%, 40%)", // Dark blue
+        "color-4": "hsl(110, 50%, 40%)", // Dark green
+        "color-5": "hsl(60, 100%, 50%)", // Yellow
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "12px", // Larger rounded corners
+        md: "8px", // Medium rounded corners
+        sm: "4px", // Small rounded corners
       },
       animation: {
-        rainbow: "rainbow var(--speed, 2s) infinite linear",
-        "shiny-text": "shiny-text 8s infinite",
-        gradient: "gradient 8s linear infinite",
+        rainbow: "rainbow 3s infinite linear", // Faster rainbow animation
+        "shiny-text": "shiny-text 6s infinite", // Shiny text with slightly shorter loop
+        gradient: "gradient 10s linear infinite", // Slower gradient animation
       },
       keyframes: {
         rainbow: {
@@ -72,7 +72,7 @@ export default {
             "background-position": "0%",
           },
           "100%": {
-            "background-position": "200%",
+            "background-position": "300%",
           },
         },
         "shiny-text": {
