@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState , Suspense } from "react";
 import LeetCodeDashboard from "@/components/LeetCodeDashboard";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
@@ -53,7 +53,9 @@ export default function Dashboard1Page() {
 
   return (
     <div className="container mx-auto py-8 bg-black">
-      <LeetCodeDashboard questions={questions} companies={companies} />
+    <Suspense fallback={<div>Loading dashboard...</div>}>
+        <LeetCodeDashboard questions={questions} companies={companies} />
+      </Suspense>
     </div>
   );
 }
