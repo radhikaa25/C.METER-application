@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Menu, Settings } from "lucide-react";
+import { Menu, Settings} from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -60,7 +60,7 @@ const Navbar = () => {
             alt="Codemeter Logo"
             className="h-20 w-20"
           />
-          <div className="font-bold text-2xl text-white-800">
+          <div className="font-bold text-2xl text-white">
             <Link href="/" className="hover:text-yellow-600">
               Codemeter
             </Link>
@@ -68,12 +68,28 @@ const Navbar = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 items-center">
+          {/* About Button */}
+          <Button
+            variant="ghost"
+            size="md"
+            onClick={() => {
+              document
+                .getElementById("why-choose-us") 
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="hover:text-white text-white"
+          >
+            About
+          </Button>
+
+        
+
           {/* Settings Icon */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
-                <Settings className="h-6 w-6 hover:text-blue-500" /> {/* Replaced Select with an icon */}
+                <Settings className="h-6 w-6 hover:text-blue-500" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mt-2 border dark:border-black">

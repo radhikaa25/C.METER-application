@@ -53,7 +53,7 @@ export default function Dashboard1Page() {
 
   return (
     <div className="container mx-auto py-8 bg-black">
-    <Suspense fallback={<div>Loading dashboard...</div>}>
+    <Suspense fallback={<div>Loading dashboard</div>}>
         <LeetCodeDashboard questions={questions} companies={companies} />
       </Suspense>
     </div>

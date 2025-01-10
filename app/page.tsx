@@ -74,6 +74,7 @@ export default function Home() {
         </motion.div>
 
         <motion.div
+          id="why-choose-us"
           className="mt-24 text-center px-6 py-12 bg-gray-800 rounded-xl shadow-xl"
           variants={containerVariants}
           initial="hidden"
