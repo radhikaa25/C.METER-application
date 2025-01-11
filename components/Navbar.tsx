@@ -62,7 +62,7 @@ const Navbar = () => {
           />
           <div className="font-bold text-2xl text-white">
             <Link href="/" className="hover:text-yellow-600">
-              Codemeter
+              Codemaster
             </Link>
           </div>
         </div>
@@ -72,7 +72,7 @@ const Navbar = () => {
           {/* About Button */}
           <Button
             variant="ghost"
-            size="md"
+            size="sm"
             onClick={() => {
               document
                 .getElementById("why-choose-us") 
